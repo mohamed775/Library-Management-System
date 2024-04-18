@@ -25,6 +25,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.globel.library.entity.Book;
 import com.globel.library.service.BookService;
 
+import jakarta.transaction.Transactional;
+
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class bookControllerTest {

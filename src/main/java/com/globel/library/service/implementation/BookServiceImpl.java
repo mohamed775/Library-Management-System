@@ -15,19 +15,21 @@ import com.globel.library.service.BookService;
 
 import jakarta.transaction.Transactional;
 
-
+//@Transactional   --> if i want to apply in all method
 @Service
 public class BookServiceImpl implements BookService {
 
 	@Autowired
 	private BookRepo bookRepo;
 
+	// find all books
 	@Override
 	@Cacheable(value = "findAllBook",key = "#root.methodName")
 	public List<Book> findAll() {
 		return bookRepo.findAll();
 	}
 
+	// find book by id
 	@Override
 	@Cacheable(value = "findBookById",key = "#id")
 	public Book findById(Long id) {
@@ -39,11 +41,14 @@ public class BookServiceImpl implements BookService {
 		}
 	} 
 
+	// find book and not must to retrive it via DB
 	@Override
 	public Book getById(Long id) {
 		return bookRepo.getById(id);
 	}
 
+	
+	// add new book 
 	@Override
 	@Transactional
 	@CacheEvict(value = {"findAllBook" ,"findBookById"} ,key = "#root.methodName" , allEntries = true)
@@ -51,8 +56,11 @@ public class BookServiceImpl implements BookService {
 		return bookRepo.save(entity);
 	}
 
+	// update  book 
+	
 	@Override
 	@Transactional
+//	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 30, readOnly = false)
 	@CacheEvict(value = {"findAllBook" ,"findBookById"} ,key = "#root.methodName" , allEntries = true)
 	public Book update(Book entity) {
 		Book book = bookRepo.getById(entity.getId());
@@ -69,6 +77,8 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	
+	// delete book by id
 	@Override
 	public void deleteById(Long id) {
 
@@ -76,6 +86,9 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	
+	// spcific fun to edit book status (book found or not )
+	
 	@Override
 	public void updateAvliableFalse(Long bookId) {
 
@@ -84,7 +97,6 @@ public class BookServiceImpl implements BookService {
 			book.setAvilable(false);
 			update(book);
 		}
-
 	}
 
 	@Override

@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +25,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.globel.library.entity.Patron;
 import com.globel.library.service.PatronService;
 
+import jakarta.transaction.Transactional;
+
+
+@Transactional
 @SpringBootTest
 @AutoConfigureMockMvc
 public class patronControllerTest {
