@@ -8,8 +8,6 @@ import com.globel.library.entity.BorrowingRecord;
 
 @Repository
 public interface BorrowingRecordRepo extends JpaRepository<BorrowingRecord, Long> {
-
 	
-	BorrowingRecord findByBookIdAndPatronId (Long bookId , Long patronId);
-	
+	BorrowingRecord findBorrowingRecordByBookIdAndPatronId (Long bookId , Long patronId);
 }

@@ -31,6 +31,17 @@ public class GlobelExceptionHandler extends ResponseEntityExceptionHandler{
 		
 	}
 	
+	@ExceptionHandler({bookHasBorrowed.class})
+	public ResponseEntity<?> handleBookBorrow(bookHasBorrowed ex){
+		
+		errorResponse error = new errorResponse (ex.getLocalizedMessage() ,Arrays.asList(ex.getMessage()));
+		
+		return  ResponseEntity
+				.status(HttpStatus.NOT_FOUND)
+				.body(error);
+		
+	}
+	
 	@ExceptionHandler({DuplicateRecordException.class})
 	public ResponseEntity<?> handleDuplicateRecord(DuplicateRecordException ex){
 		

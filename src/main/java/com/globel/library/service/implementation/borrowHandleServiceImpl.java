@@ -16,6 +16,8 @@ import com.globel.library.service.BookService;
 import com.globel.library.service.PatronService;
 import com.globel.library.service.borrowHandleService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class borrowHandleServiceImpl implements borrowHandleService {
 
@@ -24,46 +26,60 @@ public class borrowHandleServiceImpl implements borrowHandleService {
 
 	@Autowired
 	private BookService BookService;
+	@Autowired
 	private PatronService patronService;
 
-	
 	@Override
+	@Transactional
 	public BorrowingRecord borrowBook(Long bookId, Long patronId) {
 
 		Book book = BookService.findById(bookId);
-		Patron patron = patronService.findById(patronId);
 
-		if (book != null && patron != null) {
-			if (AllowPatronBorrow(book)) {
-				BorrowingRecord borrowingRecord = new BorrowingRecord();
-				borrowingRecord.setBook(book);
-				borrowingRecord.setPatron(patron);
-				borrowingRecord.setBorrowDate(LocalDate.now());
-				borrowingRecordRepo.save(borrowingRecord);
-				BookService.updateAvliableFalse(bookId);
-				return borrowingRecord;
-			} else 
-				throw new bookHasBorrowed("book with id " + bookId + "has been borrowed");
-			
+		if (AllowPatronBorrow(bookId)) {
+
+			BookService.updateAvliableFalse(bookId);
+			BorrowingRecord borrowingRecord = new BorrowingRecord();
+			borrowingRecord.setBook(book);
+			borrowingRecord.setPatron(patronService.findById(patronId));
+			borrowingRecord.setBorrowDate(LocalDate.now());
+
+			return borrowingRecordRepo.save(borrowingRecord);
+
 		} else
-			throw new RecordNotFoundException("book with id:- " + bookId + " or patron with id  " + patronId + "  not found");
+			throw new bookHasBorrowed("book with id " + bookId + "  has been borrowed");
 	}
 
 	@Override
+	@Transactional
 	public BorrowingRecord returnBook(Long bookId, Long patronId) {
-		return null;
+
+		BorrowingRecord record = borrowingRecordRepo.findBorrowingRecordByBookIdAndPatronId(bookId, patronId);
+		if (record == null ) {
+			throw new RecordNotFoundException("record not found check bookID : " + bookId + " and patronId : " + patronId);
+		} else {
+			BookService.updateAvliableTrue(bookId);
+			record.setId(record.getId());
+			record.setReturnDate(LocalDate.now());
+			return  borrowingRecordRepo.save(record) ;
+		}
+
 	}
+
 	
 	
-	
-	public boolean AllowPatronBorrow(Book book) {
+	/////////////////////////////////// help fun
+
+	public boolean AllowPatronBorrow(Long bookId) {
+		Book book = BookService.findById(bookId);
 		if (book.isAvilable()) {
 			return true;
 		} else
 			return false;
 	}
-	
-	public void bookReturned(Book book) {
+
+	public void bookReturned(Long bookId) {
+		Book book = BookService.findById(bookId);
+		book.setId(bookId);
 		book.setAvilable(true);
 		BookService.update(book);
 	}
