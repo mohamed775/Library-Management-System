@@ -50,21 +50,26 @@ Testing:
 ●  unit tests to validate the functionality of API endpoints.
 ● Use testing frameworks like JUnit, Mockito, or SpringBootTest for testing.
 
+----------------------------------------------------------------------------
 
-# How RUN PROJECT
+#### How RUN PROJECT
 
-## BE sure that you install JDK
-## RUN Jar file 
-## open localhost and follow API.json (this file has clear explain for how use and when)
+1- BE sure that you install JDK
+2- RUN Jar file 
+3-open localhost and follow API.json (this file has clear explain for how use and when)
 
-# Authentication 
 
-## auth : non 
-## if you need to open auth (open pom file and un hash security dependancy)
-## your auth route will be on all route 
-## auth type : basic auth 
-## user : admin
-## password : 123
-## if u want to edit user or pass from applecation.prop
+------------------------------------------------------------------------------
+#### Authentication 
 
+● auth : non 
+● if you need to open auth (open pom file and un hash security dependancy)
+● your auth route will be on all route 
+● auth type : basic auth 
+● user : admin
+● password : 123
+● if u want to edit user or pass from applecation.prop
+
+
+------------------------------------------------------------------------------------------------------
 
