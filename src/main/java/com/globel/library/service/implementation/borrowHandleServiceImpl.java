@@ -3,12 +3,10 @@ package com.globel.library.service.implementation;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.globel.library.entity.Book;
 import com.globel.library.entity.BorrowingRecord;
-import com.globel.library.entity.Patron;
 import com.globel.library.error.RecordNotFoundException;
 import com.globel.library.error.bookHasBorrowed;
 import com.globel.library.repository.BorrowingRecordRepo;
@@ -26,11 +24,13 @@ public class borrowHandleServiceImpl implements borrowHandleService {
 
 	@Autowired
 	private BookService BookService;
+	
 	@Autowired
 	private PatronService patronService;
 
+	
 	@Override
-	@Transactional
+	@Transactional  // transaction method
 	public BorrowingRecord borrowBook(Long bookId, Long patronId) {
 
 		Book book = BookService.findById(bookId);
@@ -50,7 +50,7 @@ public class borrowHandleServiceImpl implements borrowHandleService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional   // transaction method
 	public BorrowingRecord returnBook(Long bookId, Long patronId) {
 
 		BorrowingRecord record = borrowingRecordRepo.findBorrowingRecordByBookIdAndPatronId(bookId, patronId);
@@ -67,8 +67,9 @@ public class borrowHandleServiceImpl implements borrowHandleService {
 
 	
 	
-	/////////////////////////////////// help fun
-
+    //   <<< --- help method --- >>>
+	
+	// check book avail or not 
 	public boolean AllowPatronBorrow(Long bookId) {
 		Book book = BookService.findById(bookId);
 		if (book.isAvilable()) {
@@ -77,11 +78,11 @@ public class borrowHandleServiceImpl implements borrowHandleService {
 			return false;
 	}
 
-	public void bookReturned(Long bookId) {
-		Book book = BookService.findById(bookId);
-		book.setId(bookId);
-		book.setAvilable(true);
-		BookService.update(book);
-	}
+//	public void bookReturned(Long bookId) {
+//		Book book = BookService.findById(bookId);
+//		book.setId(bookId);
+//		book.setAvilable(true);
+//		BookService.update(book);
+//	}
 
 }

@@ -25,40 +25,43 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/books")
 public class bookController {
 
+	// inject BookService in controller 
 	@Autowired
 	private BookService bookService ;
 	
 	
+	// find all books
 	@GetMapping()
 	public ResponseEntity<List<Book>>  findAll() {
 		return ResponseEntity.ok(bookService.findAll());
 	}
 	
 	
+	// find book by its id
 	@GetMapping("/{id}")
 	public ResponseEntity<Book>  findById(@PathVariable Long id) {
 		return ResponseEntity.ok(bookService.findById(id));
 	}
 	
 
-	
+	// add new book (not add book id for this value , its generated auto)
 	@PostMapping()
 	public ResponseEntity<Book> insert(@Valid @RequestBody Book entity) {
 		return ResponseEntity.ok(bookService.insert(entity));
 	}
 
 	
+	// update book data based on bookId (put book id and below data for edit)
 	@PutMapping()
 	public ResponseEntity<Book> update(@Valid @RequestBody  Book entity) {
 		return ResponseEntity.ok(bookService.update(entity));
-		
 	}
 	
+	
+	// delete book by id
 	@DeleteMapping("/{id}")
 	public void deleteById( @PathVariable Long id) {
-
 		bookService.deleteById(id);
-
 	}
 	
 }

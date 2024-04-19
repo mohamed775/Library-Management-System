@@ -27,6 +27,7 @@ public class BorrowingRecord {
     @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long id;
 
+	
     @NotNull
     @ManyToOne
     @JoinColumn(name = "book_id")

@@ -14,6 +14,9 @@ import lombok.extern.log4j.Log4j2;
 @Component
 public class logTimeAspect {
 
+	
+	// logTime for each request to know runtime 
+	
 	@Around(value = "execution(* com.globel.library.service.*.*(..))" )
 	public Object logTime(ProceedingJoinPoint joinPoint) throws Throwable {
 		Long stratTime = System.currentTimeMillis();

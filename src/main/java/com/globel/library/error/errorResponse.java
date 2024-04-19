@@ -3,6 +3,13 @@ package com.globel.library.error;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class errorResponse {
 
 	private Boolean success;
@@ -10,48 +17,14 @@ public class errorResponse {
 	private LocalDateTime dateTime;
 	private List<String> details;
 
-	public errorResponse() {
-		super();
-	}
 
+	// custom cons for two variable
 	public errorResponse(String message, List<String> details) {
 		super();
-		this.message = message;
-		this.details = details;
-		this.success = Boolean.FALSE;
-		this.dateTime = LocalDateTime.now();
-	}
-
-	public Boolean getSuccess() {
-		return success;
-	}
-
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public LocalDateTime getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(LocalDateTime dateTime) {
-		this.dateTime = dateTime;
-	}
-
-	public List<String> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<String> details) {
-		this.details = details;
+		this.message = message;  // message
+		this.details = details;  // details
+		this.success = Boolean.FALSE; // static 
+		this.dateTime = LocalDateTime.now(); // static 
 	}
 	
 	

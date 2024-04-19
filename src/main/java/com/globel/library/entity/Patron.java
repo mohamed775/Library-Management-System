@@ -23,9 +23,13 @@ public class Patron {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	
+	// must be has at least one char ("a")
     @NotBlank
 	private String name;
 	
+    
+	// must be has at least one char ("a")
     @NotBlank
 	private String contactInformation;	
 

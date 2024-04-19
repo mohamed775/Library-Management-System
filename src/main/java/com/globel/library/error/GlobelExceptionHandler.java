@@ -42,6 +42,7 @@ public class GlobelExceptionHandler extends ResponseEntityExceptionHandler{
 		
 	}
 	
+	
 	@ExceptionHandler({DuplicateRecordException.class})
 	public ResponseEntity<?> handleDuplicateRecord(DuplicateRecordException ex){
 		
@@ -52,6 +53,8 @@ public class GlobelExceptionHandler extends ResponseEntityExceptionHandler{
 				.body(error);
 	}
 	
+	
+	// handle invalid parameter in request 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {

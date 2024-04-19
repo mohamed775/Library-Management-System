@@ -19,17 +19,22 @@ import jakarta.transaction.Transactional;
 @Service
 public class PatronServiceImpl implements PatronService {
 
+	// inject PatronRepo
 	@Autowired
 	private PatronRepo patronRepo;
-	
+
 	@Override
-	@Cacheable(value = "findAllPatrons",key = "#root.methodName")
+	@Cacheable(value = "findAllPatrons", key = "#root.methodName") // caching
 	public List<Patron> findAll() {
-		return patronRepo.findAll();
+		List<Patron> patrons = patronRepo.findAll();
+		if (patrons.isEmpty()) {
+			throw new RecordNotFoundException("we not have any patrons");
+		}
+		return patrons;
 	}
 
 	@Override
-	@Cacheable(value = "findAptronById",key = "#id")
+	@Cacheable(value = "findAptronById", key = "#id") // caching
 	public Patron findById(Long id) {
 		Optional<Patron> entity = patronRepo.findById(id);
 		if (entity.isPresent()) {
@@ -46,30 +51,41 @@ public class PatronServiceImpl implements PatronService {
 
 	@Override
 	@Transactional
-	@CacheEvict(value = {"findAllPatrons" ,"findAptronById"} ,key = "#root.methodName" , allEntries = true)
+	@CacheEvict(value = { "findAllPatrons", "findAptronById" }, key = "#root.methodName", allEntries = true) // caching
+																												// delete
+																												// (for
+																												// update)
 	public Patron insert(Patron entity) {
 		return patronRepo.save(entity);
 	}
 
 	@Override
 	@Transactional
-	@CacheEvict(value = {"findAllPatrons" ,"findAptronById"} ,key = "#root.methodName" , allEntries = true)
+	@CacheEvict(value = { "findAllPatrons", "findAptronById" }, key = "#root.methodName", allEntries = true) // caching
+																												// delete
+																												// (for
+																												// update)
 	public Patron update(Patron entity) {
 		Patron patron = patronRepo.getById(entity.getId());
-		
+
 		if (patron != null) {
 			patron.setName(entity.getName());
 			patron.setContactInformation(entity.getContactInformation());
 			return patronRepo.save(patron);
+		} else {
+			throw new RecordNotFoundException("book  data not found");
 		}
-		return patron;
-		
+
 	}
 
 	@Override
 	public void deleteById(Long id) {
-
-		patronRepo.deleteById(id);
+		Optional<Patron> entity = patronRepo.findById(id);
+		if (entity.isPresent()) {
+			patronRepo.deleteById(id);
+		} else {
+			throw new RecordNotFoundException("book with id:- " + id + "  not found to deleted");
+		}
 
 	}
 

@@ -16,6 +16,8 @@ import lombok.extern.log4j.Log4j2;
 public class measure {
 
 
+	// cutPoint for main 3 package 
+	
 	@Pointcut(value = "execution(* com.globel.library.repository.*.*(..))" )
 	public void forRepositoryLog () {}
 	
@@ -28,6 +30,8 @@ public class measure {
 	@Pointcut(value = "forRepositoryLog() || forServiceLog() || forControllerLog()" )
 	public void forAllApp () {}
 	
+	
+	// cutPoint for allApp   
 	
 	@Before(value = "forAllApp()")
 	public void beforeMethod(JoinPoint joinPoint) {

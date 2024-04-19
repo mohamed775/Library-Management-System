@@ -24,35 +24,39 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/patrons")
 public class patronController {
 
+	// inject PatronService
 	@Autowired
 	private PatronService patronService ;
 	
 	
+	// find all patrons
 	@GetMapping()
 	public ResponseEntity<List<Patron>>  findAll() {
 		return ResponseEntity.ok(patronService.findAll());
 	}
 	
 	
+	// find patron by its id
 	@GetMapping("/{id}")
 	public ResponseEntity<Patron>  findById(@PathVariable Long id) {
 		return ResponseEntity.ok(patronService.findById(id));
 	}
 	
 
-	
+	// add new patron (not add patron id for this value , its generated auto)
 	@PostMapping()
 	public ResponseEntity<Patron> insert(@Valid @RequestBody Patron entity) {
 		return ResponseEntity.ok(patronService.insert(entity));
 	}
 
-	
+	// update patron data based on patronId (put patron id and below data for edit)
 	@PutMapping()
 	public ResponseEntity<Patron> update(@Valid @RequestBody  Patron entity) {
 		return ResponseEntity.ok(patronService.update(entity));
 		
 	}
 	
+	// delete patron by id
 	@DeleteMapping("/{id}")
 	public void deleteById( @PathVariable Long id) {
 
