@@ -55,7 +55,7 @@ Testing:
 #### How RUN PROJECT
 
 1- BE sure that you install JDK
-2- RUN Jar file (cmd : java -jar {jar_Path_file in your pc }  )
+#####2- RUN Jar file (cmd : java -jar {jar_Path_file in your pc }  )
 3-open localhost and follow API.json (this file has clear explain for how use and when)
 
 
