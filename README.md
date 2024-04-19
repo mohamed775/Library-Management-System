@@ -54,9 +54,13 @@ Testing:
 
 #### How RUN PROJECT
 
-1- BE sure that you install JDK
-##### 2- RUN Jar file (cmd : java -jar {jar_Path_file in your pc }  )
-3-open localhost and follow API.json (this file has clear explain for how use and when)
+1- BE sure that you install JDK and maven
+2- download or clone project on your own pc
+3- open terminal in project path 
+4- write commend : mvn clean install 
+5- will create target file - open it and will file jar file 
+##### 6- RUN Jar file (cmd : java -jar {jar_Path_file in your pc }  )
+7-open localhost and follow API.json (this file has clear explain for how use and when)
 
 
 ------------------------------------------------------------------------------
