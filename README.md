@@ -1,79 +1,101 @@
-# Library Management System 
-
-Entities:
-● Book: Includes attributes like ID, title, author, publication year, ISBN, etc.
-● Patron: Contains details like ID, name, contact information, etc.
-● Borrowing Record: Tracks the association between books and patrons,
-including borrowing and return dates.
-
-API Endpoints:
-●  RESTful endpoints to handle the following operations:
-● Book management endpoints:
-● GET /api/books: Retrieve a list of all books.
-● GET /api/books/{id}: Retrieve details of a specific book by ID.
-● POST /api/books: Add a new book to the library.
-● PUT /api/books/{id}: Update an existing book's information.
-● DELETE /api/books/{id}: Remove a book from the library.
-● Patron management endpoints:
-● GET /api/patrons: Retrieve a list of all patrons.
-● GET /api/patrons/{id}: Retrieve details of a specific patron by ID.
-● POST /api/patrons: Add a new patron to the system.
-● PUT /api/patrons/{id}: Update an existing patron's information.
-● DELETE /api/patrons/{id}: Remove a patron from the system.
-● Borrowing endpoints:
-● POST /api/borrow/{bookId}/patron/{patronId}: Allow a patron to
-borrow a book.
-
-● PUT /api/return/{bookId}/patron/{patronId}: Record the return of a borrowed book by a patron.
-
-Data Storage:
-● Use an appropriate database ( MySQL ) to persist book, patron, and borrowing record details.
-●  relationships between entities (e.g., one-to-many between books and borrowing records).
-
-Validation and Error Handling:
-●  input validation for API requests (e.g., validating required fields, data formats, etc.).
-● Handle exceptions gracefully and return appropriate HTTP status codes and error messages.
-
-Security ():
-●  basic authentication .
-
-Aspects ():
-● logging using Aspect-Oriented Programming (AOP) to log method calls, exceptions, and performance metrics of certain operations like book additions, updates, and patron transactions.
-
-Caching ():
-● Utilize Spring's caching mechanisms to cache frequently accessed data, such as book details or patron information, to improve system performance.
-
-Transaction Management:
-● Implement declarative transaction management using Spring's @Transactional annotation to ensure data integrity during critical operations.
-
-Testing:
-●  unit tests to validate the functionality of API endpoints.
-● Use testing frameworks like JUnit, Mockito, or SpringBootTest for testing.
-
-----------------------------------------------------------------------------
-
-#### How RUN PROJECT
-
-1- BE sure that you install JDK and maven
-2- download or clone project on your own pc
-3- open terminal in project path 
-4- write commend : mvn clean install 
-5- will create target file - open it and will file jar file 
-##### 6- RUN Jar file (cmd : java -jar {jar_Path_file in your pc }  )
-7-open localhost and follow API.json (this file has clear explain for how use and when)
+<div align="center">
+  <h1>🚀 Library Management System </h1>
+</div>
 
 
-------------------------------------------------------------------------------
-#### Authentication 
+## 📄 Description
 
-● auth : non 
-● if you need to open auth (open pom file and un hash security dependancy)
-● your auth route will be on all route 
-● auth type : basic auth 
-● user : admin
-● password : 123
-● if u want to edit user or pass from applecation.prop
+This Library Management System is designed to efficiently manage library resources including books, patrons, and borrowing records.
 
 
-------------------------------------------------------------------------------------------------------
+## 📦 Installation
+
+Clone the Repository:
+ - git clone https://github.com/mohamed775/Library-Management-System.git
+Database Configuration:
+ - Set up a MySQL database and configure the connection settings in application.properties.
+Build and Run:
+ - Build the project using Maven: mvn clean install.
+ - Run the application using the generated JAR file: java -jar target/library-management-system.jar.
+Access the Application:
+ - Once the application is running, access it through the specified URL.
+ - Use the provided API endpoints for managing books, patrons, and borrowing records.
+
+
+## 🚀 Functionality
+
+Validation and Error Handling :
+ - Provides input validation for API requests.
+Handles exceptions gracefully and returns appropriate HTTP status codes and error messages.
+
+Security :
+ - Basic authentication ensures secure access to the system.
+ - Username: admin, Password: 123 (Editable in application.properties).
+   
+Aspects :
+ - Logging implemented using Aspect-Oriented Programming (AOP) to log method calls, exceptions, and performance metrics.
+   
+Caching :
+ - Utilizes Spring's caching mechanisms to cache frequently accessed data for improved system performance.
+   
+Transaction Management :
+ - Declarative transaction management using Spring's @Transactional annotation ensures data integrity during critical operations.
+   
+Testing : 
+ - Includes unit tests to validate the functionality of API endpoints.
+Utilizes testing frameworks like JUnit, Mockito, or SpringBootTest for comprehensive testing.
+
+
+## ![API Endpoint Icon](https://img.icons8.com/plasticine/100/000000/api-settings.png)
+
+Book Management : 
+ - GET /api/books: Retrieve a list of all books.
+ - GET /api/books/{id}: Retrieve details of a specific book by ID.
+ - POST /api/books: Add a new book to the library.
+ - PUT /api/books/{id}: Update an existing book's information.
+ - DELETE /api/books/{id}: Remove a book from the library.
+
+Patron Management : 
+ - GET /api/patrons: Retrieve a list of all patrons.
+ - GET /api/patrons/{id}: Retrieve details of a specific patron by ID.
+ - POST /api/patrons: Add a new patron to the system.
+ - PUT /api/patrons/{id}: Update an existing patron's information.
+ - DELETE /api/patrons/{id}: Remove a patron from the system.
+
+Borrowing :
+ - POST /api/borrow/{bookId}/patron/{patronId}: Allow a patron to borrow a book.
+ - PUT /api/return/{bookId}/patron/{patronId}: Record the return of a borrowed book by a patron.
+
+
+
+## ✨ Features
+
+- Book Management: Add, update, and delete books in the library inventory.
+- Patron Management: Manage patron details such as name, contact information, etc.
+- Borrowing Records: Track borrowing and return of books by patrons.
+
+
+## ✨ Technologies Used
+
+- Java: Core programming language.
+- Spring Boot: Framework for building robust Java applications.
+- MySQL: Database management system for data storage.
+- Spring Data JPA: Simplifies data access using the JPA specification.
+- Spring Security: Provides authentication and authorization.
+
+
+## 🤝 Contributing
+
+- Contributions are welcome! Feel free to open issues or submit pull requests for any improvements or features you'd like to see added to the project.
+
+
+## 📝 License
+---------------------------------------------------------
+- This project is licensed under the MIT License.
+---------------------------------------------------------
+
+
+## 📬 Contact
+
+- Feel free to customize this template according to your project's specific requirements and implementation details. Let me know if you need further assistance or have any questions!
 
